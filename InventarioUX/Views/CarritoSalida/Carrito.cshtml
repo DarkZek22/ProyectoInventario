@@ -1,0 +1,55 @@
+﻿@using InventarioUX.Controllers
+@{
+    ViewBag.Title = "Carrito";
+}
+
+<div>
+    @Html.Partial("SelectProducto")
+</div>
+
+<h1>              </h1>
+<h1>              </h1>
+
+<table class="table">
+    @using (Html.BeginForm("Update", "CarritoSalida", FormMethod.Post))
+    {
+        <tr>
+            <th>Eliminar</th>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Cantidad<input type="submit" value="Update" /></th>
+            <th>Subtotal</th>
+        </tr>
+        if (Session["cart"] != null)
+        {
+            foreach (Item item in (List<Item>)Session["cart"])
+            {
+                <tr>
+                    <th><button class="btn btn-default">@Html.ActionLink("Eliminar", "Eliminar", "CarritoSalida", new { id = item.Producto.ID })</button></th>
+                    <th>@item.Producto.ID</th>
+                    <th>@item.Producto.NOMBRE</th>
+                    <th>@item.Producto.PRECIO</th>
+                    <th><input type="text" name="Cantidad" , value="@item.Cantidad" /></th>
+                    <th>@(item.Producto.PRECIO * item.Cantidad)</th>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+            </tr>
+        }
+    }
+</table>
+
+<button class="btn btn-default">@Html.ActionLink("Generar Salida", "Existencias", "CarritoSalida")</button>
+<button class="btn btn-default">@Html.ActionLink("Cancelar Movimiento", "Index", "Account")</button>
+
+

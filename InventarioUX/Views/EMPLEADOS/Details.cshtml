@@ -1,0 +1,66 @@
+﻿@model InventarioUX.Models.EMPLEADOS
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EMPLEADOS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CONTAINING_TIPO_EMPLEADO.TIPO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONTAINING_TIPO_EMPLEADO.TIPO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USERNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USERNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PASSWORD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PASSWORD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AP_PATERNO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AP_PATERNO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AP_MATERNO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AP_MATERNO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

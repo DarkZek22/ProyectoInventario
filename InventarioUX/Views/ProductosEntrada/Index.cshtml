@@ -1,0 +1,25 @@
+﻿@using InventarioUX.Models
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Agregar Producto</th>
+    </tr>
+    @foreach (PRODUCTOS p in ViewBag.listaproductosentrada)
+    {
+        <tr>
+            <th>@p.ID</th>
+            <th>@p.NOMBRE</th>
+            <th>@p.PRECIO</th>
+            <th align="center"><button class="btn btn-default">@Html.ActionLink("Agregar", "Agregar", "CarritoEntrada", new { id = p.ID }, null)</button></th>
+        </tr>
+    }
+</table>
+

@@ -1,0 +1,10 @@
+﻿@model InventarioUX.Models.PRODUCTOS
+
+@using (Html.BeginForm("codigobarras", "CarritoSalida", FormMethod.Post))
+{
+    <div>
+        <h5>Ingresar codigo de barras</h5>
+        <input type="text" name="CodigoBarras" />
+        <input type="submit" value="Agregar Producto" class="btn btn-default" />
+    </div>
+}
