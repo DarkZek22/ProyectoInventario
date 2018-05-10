@@ -17,5 +17,6 @@ namespace InventarioUX.Models
         public int PRODUCTOSID { get; set; }
 
         public virtual PRODUCTOS CONTAINING_PRODUCTOS { get; set; }
+
     }
 }

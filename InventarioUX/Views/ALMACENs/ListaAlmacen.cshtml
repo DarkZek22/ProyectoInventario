@@ -1,0 +1,28 @@
+﻿@using InventarioUX.Models
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Almacen</h2>
+
+<table class="table">
+    <tr>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Ubicacion</th>
+    </tr>
+
+    @foreach (PRODUCTOS p in ViewBag.ListaProductos)
+        {
+            <tr>
+                <th>@p.NOMBRE</th>
+                <th>@p.PRECIO</th>
+                <th>@p.CANTIDAD</th>
+                <th>@p.UBICACION</th>
+            </tr>
+        }
+
+
+
+</table>

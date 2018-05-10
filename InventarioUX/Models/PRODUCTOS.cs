@@ -30,9 +30,13 @@ namespace InventarioUX.Models
         [Display(Name = "Precio")]
         public int PRECIO { get; set; }
 
+        [Required]
+        [Display(Name = "Cantidad")]
+        public int CANTIDAD { get; set; }
 
         [StringLength(20)]
         public string UBICACION { get; set; }
+
 
 
         [Display(Name = "Categoria de Producto")]

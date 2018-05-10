@@ -1,7 +1,46 @@
-﻿
+﻿@model IEnumerable<InventarioUX.Models.MOV_ENTRADA>
+
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CONTAINING_EMPLEADOS.USERNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CONTAINING_PROVEEDORES.NOMBRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CONTAINING_EMPLEADOS.USERNAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CONTAINING_PROVEEDORES.NOMBRE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

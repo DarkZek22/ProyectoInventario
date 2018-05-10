@@ -1,0 +1,42 @@
+﻿@model InventarioUX.Models.MOV_ENTRADA
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MOV_ENTRADA</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CONTAINING_EMPLEADOS.USERNAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONTAINING_EMPLEADOS.USERNAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CONTAINING_PROVEEDORES.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONTAINING_PROVEEDORES.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

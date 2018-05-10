@@ -1,10 +1,14 @@
-﻿using InventarioUX.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using InventarioUX.Models;
+
 
 namespace InventarioUX.Controllers
 {
@@ -14,7 +18,22 @@ namespace InventarioUX.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var mOV_ENTRADA = db.MOV_ENTRADA.Include(m => m.CONTAINING_EMPLEADOS).Include(m => m.CONTAINING_PROVEEDORES);
+            return View(mOV_ENTRADA.ToList());
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            MOV_ENTRADA mOV_ENTRADA = db.MOV_ENTRADA.Find(id);
+            if (mOV_ENTRADA == null)
+            {
+                return HttpNotFound();
+            }
+            return View(mOV_ENTRADA);
         }
 
         public ActionResult SelectProducto(FormCollection fc)

@@ -282,6 +282,9 @@
     <Content Include="Views\CarritoAsignacion\OrderSaved.cshtml" />
     <Content Include="Views\CarritoAsignacion\Existencias.cshtml" />
     <Content Include="Views\CarritoAsignacion\Error.cshtml" />
+    <Content Include="Views\ALMACENs\SelectAlmacen.cshtml" />
+    <Content Include="Views\ALMACENs\ListaAlmacen.cshtml" />
+    <Content Include="Views\CarritoEntrada\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
