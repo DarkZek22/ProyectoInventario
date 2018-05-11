@@ -1,5 +1,5 @@
 ﻿@using InventarioUX.Models
-@model InventarioUX.Models.MOV_ENTRADA
+@model InventarioUX.Models.MOV_SALIDA
 
 @{
     ViewBag.Title = "Details";
@@ -20,11 +20,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CONTAINING_PROVEEDORES.NOMBRE)
+            @Html.DisplayNameFor(model => model.CONTAINING_DEPARTAMENTOS.NOMBRE)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CONTAINING_PROVEEDORES.NOMBRE)
+            @Html.DisplayFor(model => model.CONTAINING_DEPARTAMENTOS.NOMBRE)
         </dd>
 
         <dt>
@@ -44,7 +44,7 @@
         <th>Cantidad</th>
     </tr>
 
-    @foreach (MOV_ENTRADA_LISTA m in ViewBag.ListaEntrada)
+    @foreach (MOV_SALIDA_LISTA m in ViewBag.ListaSalida)
     {
         <tr>
             <th>@m.CONTAINING_PRODUCTOS.NOMBRE</th>

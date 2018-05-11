@@ -54,6 +54,7 @@ namespace InventarioUX.Controllers
                 x2.NOMBRE = x.NOMBRE;
                 x2.PRECIO = x.PRECIO;
                 x2.CATEGORIASID = x.CATEGORIASID;
+                x2.CANTIDAD = x.CANTIDAD;
                 x2.UBICACION = x.UBICACION;
                 listaProductos.Add(x2);
                 i++;

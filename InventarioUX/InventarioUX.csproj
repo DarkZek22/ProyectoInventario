@@ -168,6 +168,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ALMACEN.cs" />
+    <Compile Include="Models\AREAS.cs" />
     <Compile Include="Models\ASIGNACIONES.cs" />
     <Compile Include="Models\ASIGNACIONES_LISTA.cs" />
     <Compile Include="Models\CAT_PRODUCTOS.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Models\MOV_SALIDA_LISTA.cs" />
     <Compile Include="Models\PRODUCTOS.cs" />
     <Compile Include="Models\PROVEEDORES.cs" />
+    <Compile Include="Models\PUESTOS.cs" />
     <Compile Include="Models\TIPO_EMPLEADOS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -285,6 +287,7 @@
     <Content Include="Views\ALMACENs\SelectAlmacen.cshtml" />
     <Content Include="Views\ALMACENs\ListaAlmacen.cshtml" />
     <Content Include="Views\CarritoEntrada\Details.cshtml" />
+    <Content Include="Views\CarritoSalida\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -33,6 +33,28 @@ namespace InventarioUX.Controllers
             {
                 return HttpNotFound();
             }
+            List<int> result = new List<int>();
+            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            con.Open();
+            var command = new SqlCommand("SELECT ID FROM MOV_ENTRADA_LISTA WHERE MOV_ENTRADAID='" + id + "'", con);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                result.Add(Convert.ToInt32(reader["ID"]));
+            }
+            List<MOV_ENTRADA_LISTA> listaProductos = new List<MOV_ENTRADA_LISTA>();
+            int i = 0;
+            foreach (var w in result)
+            {
+                var x = db.MOV_ENTRADA_LISTA.Find(result[i]);
+                MOV_ENTRADA_LISTA x2 = new MOV_ENTRADA_LISTA();
+                x2.CONTAINING_PRODUCTOS = x.CONTAINING_PRODUCTOS;
+                x2.PRECIO = x.PRECIO;
+                x2.CANTIDAD = x.CANTIDAD;
+                listaProductos.Add(x2);
+                i++;
+            }
+            ViewBag.ListaEntrada = listaProductos;
             return View(mOV_ENTRADA);
         }
 
@@ -153,7 +175,7 @@ namespace InventarioUX.Controllers
                 db.MOV_ENTRADA_LISTA.Add(mov_entrada_lista);
                 db.SaveChanges();
 
-                SqlCommand command = new SqlCommand("UPDATE ALMACENs SET CANTIDAD = CANTIDAD + " + item.Cantidad + " WHERE PRODUCTOSID = " + item.Producto.ID + "", con);
+                SqlCommand command = new SqlCommand("UPDATE PRODUCTOS SET CANTIDAD = CANTIDAD + " + item.Cantidad + " WHERE ID = " + item.Producto.ID + "", con);
                 command.ExecuteNonQuery();
             }
             Session.Remove("Proveedor");
