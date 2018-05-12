@@ -28,7 +28,7 @@ namespace InventarioUX.Controllers
             con.Open();
 
             string[] cantidad = fc.GetValues("codigobarras");
-            int codigobarras = Convert.ToInt32(cantidad[0]);
+            string codigobarras = cantidad[0];
 
             var command = new SqlCommand("SELECT ID FROM dbo.PRODUCTOS WHERE CODIGOBARRAS='" + codigobarras + "'", con);
             int id = (int)(command.ExecuteScalar());

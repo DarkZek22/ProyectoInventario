@@ -17,7 +17,8 @@ namespace InventarioUX.Controllers
         // GET: PROVEEDORES
         public ActionResult Index()
         {
-            return View(db.PROVEEDORES.ToList());
+            ViewBag.ListaProveedores = db.PROVEEDORES.ToList();
+            return View();
         }
 
         // GET: PROVEEDORES/Details/5
@@ -46,7 +47,7 @@ namespace InventarioUX.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,NOMBRE,AP_PATERNO,AP_MATERNO,DIRECCION,TELEFONO,EMAIL")] PROVEEDORES pROVEEDORES)
+        public ActionResult Index([Bind(Include = "ID,NOMBRE,AP_PATERNO,AP_MATERNO,DIRECCION,TELEFONO,EMAIL")] PROVEEDORES pROVEEDORES)
         {
             if (ModelState.IsValid)
             {

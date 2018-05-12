@@ -12,6 +12,7 @@ namespace InventarioUX.Models
         public PRODUCTOS()
         {
             UBICACION = "Almacen"; //set default value here
+            CANTIDAD = 0;
         }
 
         [Key]
@@ -19,7 +20,8 @@ namespace InventarioUX.Models
 
         [Required]
         [Display(Name = "Codigo de Barras")]
-        public int CODIGOBARRAS { get; set; }
+        [StringLength(15, MinimumLength = 12, ErrorMessage = "Codigo de barras invalido")]
+        public string CODIGOBARRAS { get; set; }
 
         [Required]
         [StringLength(20)]
@@ -34,7 +36,7 @@ namespace InventarioUX.Models
         [Display(Name = "Cantidad")]
         public int CANTIDAD { get; set; }
 
-        [StringLength(20)]
+        [StringLength(120)]
         public string UBICACION { get; set; }
 
 

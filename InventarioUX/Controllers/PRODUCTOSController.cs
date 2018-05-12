@@ -18,8 +18,9 @@ namespace InventarioUX.Controllers
         // GET: PRODUCTOS
         public ActionResult Index()
         {
-            var pRODUCTOS = db.PRODUCTOS.Include(p => p.CONTAINING_CATEGORIAS);
-            return View(pRODUCTOS.ToList());
+            ViewBag.CATEGORIASID = new SelectList(db.CAT_PRODUCTO, "ID", "NOMBRE");
+            ViewBag.ListaProducto = db.PRODUCTOS.ToList();
+            return View();
         }
 
         // GET: PRODUCTOS/Details/5
@@ -49,7 +50,7 @@ namespace InventarioUX.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CODIGOBARRAS,NOMBRE,PRECIO,CATEGORIASID")] PRODUCTOS pRODUCTOS)
+        public ActionResult Index([Bind(Include = "ID,CODIGOBARRAS,NOMBRE,PRECIO,CATEGORIASID")] PRODUCTOS pRODUCTOS)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +65,8 @@ namespace InventarioUX.Controllers
             }
 
 
-            ViewBag.CATEGORIASID = new SelectList(db.CAT_PRODUCTO, "ID", "NOMBRE", pRODUCTOS.CATEGORIASID);
+            ViewBag.CATEGORIASID = new SelectList(db.CAT_PRODUCTO, "ID", "NOMBRE");
+            ViewBag.ListaProducto = db.PRODUCTOS.ToList();
             return View(pRODUCTOS);
         }
 

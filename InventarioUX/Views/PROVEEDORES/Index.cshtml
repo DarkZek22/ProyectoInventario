@@ -1,4 +1,5 @@
-﻿@model IEnumerable<InventarioUX.Models.PROVEEDORES>
+﻿@using InventarioUX.Models
+@model InventarioUX.Models.PROVEEDORES
 
 @{
     ViewBag.Title = "Index";
@@ -7,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a data-toggle='modal' data-target='#modalPROV' class='btn  btn-info'>Crear Proveedor</a>
 </p>
 <table class="table">
     <tr>
@@ -32,32 +33,107 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NOMBRE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AP_PATERNO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AP_MATERNO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DIRECCION)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TELEFONO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMAIL)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (PROVEEDORES prov in ViewBag.ListaProveedores)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => prov.NOMBRE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prov.AP_PATERNO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prov.AP_MATERNO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prov.DIRECCION)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prov.TELEFONO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prov.EMAIL)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = prov.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = prov.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = prov.ID })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<div class="modal fade" id="modalPROV" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        @using (Html.BeginForm())
+        {
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Agregar Proveedor</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h4>PROVEEDORES</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NOMBRE, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.NOMBRE, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NOMBRE, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AP_PATERNO, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.AP_PATERNO, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AP_PATERNO, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AP_MATERNO, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.AP_MATERNO, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.AP_MATERNO, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DIRECCION, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.DIRECCION, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DIRECCION, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TELEFONO, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.TELEFONO, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TELEFONO, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EMAIL, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default" data-dismiss="modal">Cancelar</button>
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+
+            </div>
+        }
+    </div>
+</div>

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<InventarioUX.Models.PRODUCTOS>
+﻿@using InventarioUX.Models
+@model InventarioUX.Models.PRODUCTOS
 
 @{
     ViewBag.Title = "Index";
@@ -7,13 +8,10 @@
 <h2>Productos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a data-toggle='modal' data-target='#modalPROD' class='btn  btn-info'>Crear Producto</a>
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CONTAINING_CATEGORIAS.NOMBRE)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.CODIGOBARRAS)
         </th>
@@ -21,31 +19,94 @@
             @Html.DisplayNameFor(model => model.NOMBRE)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.CONTAINING_CATEGORIAS.NOMBRE)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.PRECIO)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CONTAINING_CATEGORIAS.NOMBRE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CODIGOBARRAS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NOMBRE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PRECIO)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (PRODUCTOS prod in ViewBag.ListaProducto)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => prod.CODIGOBARRAS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prod.NOMBRE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prod.CONTAINING_CATEGORIAS.NOMBRE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prod.PRECIO)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = prod.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = prod.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = prod.ID })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<div class="modal fade" id="modalPROD" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        @using (Html.BeginForm())
+        {
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Agregar Producto</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h4>PRODUCTOS</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CODIGOBARRAS, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.CODIGOBARRAS, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CODIGOBARRAS, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NOMBRE, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.NOMBRE, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NOMBRE, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PRECIO, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PRECIO, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PRECIO, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CATEGORIASID, "CATEGORIASID", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("CATEGORIASID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CATEGORIASID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default" data-dismiss="modal">Cancelar</button>
+                    <input type="submit" value="Create" class="btn btn-default" />
+                    
+                </div>
+            </div>
+        }
+    </div>
+</div>

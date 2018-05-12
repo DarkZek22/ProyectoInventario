@@ -17,7 +17,8 @@ namespace InventarioUX.Controllers
         // GET: CAT_PRODUCTOS
         public ActionResult Index()
         {
-            return View(db.CAT_PRODUCTO.ToList());
+            ViewBag.ListaCategoria = db.CAT_PRODUCTO.ToList();
+            return View();
         }
 
         // GET: CAT_PRODUCTOS/Details/5
@@ -46,7 +47,7 @@ namespace InventarioUX.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,NOMBRE")] CAT_PRODUCTOS cAT_PRODUCTOS)
+        public ActionResult Index([Bind(Include = "ID,NOMBRE")] CAT_PRODUCTOS cAT_PRODUCTOS)
         {
             if (ModelState.IsValid)
             {
