@@ -24,6 +24,18 @@
         <th>
             @Html.DisplayNameFor(model => model.PRECIO)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPCION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MARCA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MODELO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SERIE)
+        </th>
         <th></th>
     </tr>
 
@@ -43,7 +55,19 @@
                 @Html.DisplayFor(modelItem => prod.PRECIO)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = prod.ID }) |
+                @Html.DisplayFor(modelItem => prod.DESCRIPCION)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prod.MARCA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prod.MODELO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => prod.SERIE)
+            </td>
+            <td>
+                <a data-toggle='modal' data-target='#modalPRODEDIT' class='btn  btn-info' id="@prod.ID">Editar Producto</a>
                 @Html.ActionLink("Details", "Details", new { id = prod.ID }) |
                 @Html.ActionLink("Delete", "Delete", new { id = prod.ID })
             </td>
@@ -62,51 +86,38 @@
                     <h4 class="modal-title" id="myModalLabel">Agregar Producto</h4>
                 </div>
                 <div class="modal-body">
-                    @Html.AntiForgeryToken()
-
-                    <div class="form-horizontal">
-                        <h4>PRODUCTOS</h4>
-                        <hr />
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.CODIGOBARRAS, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.CODIGOBARRAS, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.CODIGOBARRAS, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.NOMBRE, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.NOMBRE, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.NOMBRE, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.PRECIO, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.PRECIO, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.PRECIO, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.CATEGORIASID, "CATEGORIASID", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.DropDownList("CATEGORIASID", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.CATEGORIASID, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
+                    @Html.Partial("Create")
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn  btn-default" data-dismiss="modal">Cancelar</button>
-                    <input type="submit" value="Create" class="btn btn-default" />
-                    
                 </div>
             </div>
         }
     </div>
 </div>
+
+<div class="modal fade" id="modalPRODEDIT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        @using (Html.BeginForm())
+        {
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Agregar Producto</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Partial("Edit")
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default" data-dismiss="modal">Cancelar</button>
+                    <input type="submit" value="Create" class="btn btn-default" />
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

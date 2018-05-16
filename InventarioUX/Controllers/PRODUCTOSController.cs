@@ -11,6 +11,7 @@ using InventarioUX.Models;
 
 namespace InventarioUX.Controllers
 {
+    
     public class PRODUCTOSController : Controller
     {
         private ConnectionContext db = new ConnectionContext();
@@ -38,6 +39,7 @@ namespace InventarioUX.Controllers
             return View(pRODUCTOS);
         }
 
+
         // GET: PRODUCTOS/Create
         public ActionResult Create()
         {
@@ -50,7 +52,7 @@ namespace InventarioUX.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "ID,CODIGOBARRAS,NOMBRE,PRECIO,CATEGORIASID")] PRODUCTOS pRODUCTOS)
+        public ActionResult Index([Bind(Include = "ID,CODIGOBARRAS,NOMBRE,PRECIO,DESCRIPCION,SERIE,MARCA,MODELO,CATEGORIASID")] PRODUCTOS pRODUCTOS)
         {
             if (ModelState.IsValid)
             {
@@ -63,11 +65,40 @@ namespace InventarioUX.Controllers
                 command.ExecuteNonQuery();
                 return RedirectToAction("Index");
             }
-
-
-            ViewBag.CATEGORIASID = new SelectList(db.CAT_PRODUCTO, "ID", "NOMBRE");
-            ViewBag.ListaProducto = db.PRODUCTOS.ToList();
-            return View(pRODUCTOS);
+            else
+            {
+                if (pRODUCTOS.DESCRIPCION == null)
+                {
+                    pRODUCTOS.DESCRIPCION = "N/A";
+                }
+                if (pRODUCTOS.SERIE == null)
+                {
+                    pRODUCTOS.SERIE = "N/A";
+                }
+                if (pRODUCTOS.MARCA == null)
+                {
+                    pRODUCTOS.MARCA = "N/A";
+                }
+                if (pRODUCTOS.MODELO == null)
+                {
+                    pRODUCTOS.MODELO = "N/A";
+                }
+                if (pRODUCTOS.NOMBRE == null|| pRODUCTOS.CODIGOBARRAS == null || pRODUCTOS.PRECIO == 0 || pRODUCTOS.CATEGORIASID == 0)
+                {
+                    ViewBag.CATEGORIASID = new SelectList(db.CAT_PRODUCTO, "ID", "NOMBRE");
+                    ViewBag.ListaProducto = db.PRODUCTOS.ToList();
+                    return View(pRODUCTOS);
+                }
+                var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+                con.Open();
+                db.PRODUCTOS.Add(pRODUCTOS);
+                db.SaveChanges();
+                SqlCommand command = new SqlCommand("INSERT INTO dbo.ALMACENs (CANTIDAD, PRODUCTOSID) VALUES (0, " + pRODUCTOS.ID + ")", con);
+                //var command = new SqlCommand();
+                command.ExecuteNonQuery();
+                return RedirectToAction("Index");
+            }
+                
         }
 
         // GET: PRODUCTOS/Edit/5

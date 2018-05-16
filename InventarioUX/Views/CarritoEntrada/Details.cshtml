@@ -5,6 +5,12 @@
     ViewBag.Title = "Details";
 }
 
+<style>
+    #total {
+        text-align: left;
+    }
+</style>
+
 <h2>Details</h2>
 
 <div>
@@ -38,24 +44,39 @@
     </dl>
 </div>
 <table class="table">
-    <tr>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Cantidad</th>
-    </tr>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+
 
     @foreach (MOV_ENTRADA_LISTA m in ViewBag.ListaEntrada)
     {
-        <tr>
-            <th>@m.CONTAINING_PRODUCTOS.NOMBRE</th>
-            <th>@m.PRECIO</th>
-            <th>@m.CANTIDAD</th>
-        </tr>
+        <tbody>
+            <tr>
+                <th>@m.CONTAINING_PRODUCTOS.NOMBRE</th>
+                <th>@m.CANTIDAD</th>
+                <th>@m.PRECIO</th>
+                <th>@(m.PRECIO * m.CANTIDAD)</th>
+            </tr>
+        </tbody>
     }
 
-
+    <tfoot>
+        <tr>
+            <th>Total</th>
+            <th colspan="2"></th>
+            <th id="total" colspan="2">@Html.DisplayFor(model => model.PRECIOTOTAL)</th>
+        </tr>
+    </tfoot>
 
 </table>
+
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
+

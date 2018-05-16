@@ -12,6 +12,8 @@ namespace InventarioUX.Models
         public int ID { get; set; }
         public DateTime Fecha { get; set; }
 
+        public int PRECIOTOTAL { get; set; }
+
         [ForeignKey("CONTAINING_EMPLEADOS")]
         public int EMPLEADOID { get; set; }
         public virtual EMPLEADOS CONTAINING_EMPLEADOS { get; set; }

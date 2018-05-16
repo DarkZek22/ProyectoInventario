@@ -28,6 +28,23 @@ namespace InventarioUX.Models
         [Display(Name = "Nombre")]
         public string NOMBRE { get; set; }
 
+        [StringLength(150)]
+        [Display(Name = "Descripcion")]
+        public string DESCRIPCION { get; set; }
+
+        [StringLength(50)]
+        [Display(Name = "Serie")]
+        public string SERIE { get; set; }
+
+
+        [StringLength(30)]
+        [Display(Name = "Marca")]
+        public string MARCA { get; set; }
+
+        [StringLength(30)]
+        [Display(Name = "Modelo")]
+        public string MODELO { get; set; }
+
         [Required]
         [Display(Name = "Precio")]
         public int PRECIO { get; set; }

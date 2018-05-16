@@ -100,3 +100,4 @@ c:\users\darkz\source\repos\InventarioUX\InventarioUX\bin\es\System.Web.WebPages
 c:\users\darkz\source\repos\InventarioUX\InventarioUX\obj\Debug\InventarioUX.csproj.CopyComplete
 c:\users\darkz\source\repos\InventarioUX\InventarioUX\obj\Debug\InventarioUX.dll
 c:\users\darkz\source\repos\InventarioUX\InventarioUX\obj\Debug\InventarioUX.pdb
+C:\Users\darkz\source\repos\InventarioUX\InventarioUX\bin\Rotativa.dll

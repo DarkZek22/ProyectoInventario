@@ -56,6 +56,9 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -192,11 +195,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -224,11 +232,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\ALMACENs\Create.cshtml" />
-    <Content Include="Views\ALMACENs\Delete.cshtml" />
-    <Content Include="Views\ALMACENs\Details.cshtml" />
-    <Content Include="Views\ALMACENs\Edit.cshtml" />
-    <Content Include="Views\ALMACENs\Index.cshtml" />
     <Content Include="Views\CAT_PRODUCTOS\Create.cshtml" />
     <Content Include="Views\CAT_PRODUCTOS\Delete.cshtml" />
     <Content Include="Views\CAT_PRODUCTOS\Details.cshtml" />
@@ -288,6 +291,8 @@
     <Content Include="Views\ALMACENs\ListaAlmacen.cshtml" />
     <Content Include="Views\CarritoEntrada\Details.cshtml" />
     <Content Include="Views\CarritoSalida\Details.cshtml" />
+    <Content Include="Views\CarritoEntrada\ReciboEntrada.cshtml" />
+    <Content Include="Views\Shared\_LayoutRecibos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

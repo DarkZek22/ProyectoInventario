@@ -1,4 +1,5 @@
-﻿@model InventarioUX.Models.PRODUCTOS
+﻿@using InventarioUX.Models
+@model InventarioUX.Models.PRODUCTOS
 @{
     ViewBag.Title = "Almacen";
 }
@@ -10,15 +11,12 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { @class = "text-danger"})
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <table class="table">
                 <tr>
-                    <td>@Html.LabelFor(model => model.CATEGORIASID, "CATEGORIASID", htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                    <td>Seleccione un almacen: </td>
                     <td>@Html.DropDownList("CATEGORIASID", null, htmlAttributes: new { @class = "form-control" })</td>
                     @Html.ValidationMessageFor(model => model.CATEGORIASID, "", new { @class = "text-danger" })
-                </tr>
-                <tr>
-                    <td>     </td>
                     <td><input type="submit" value="Seleccionar" /></td>
                 </tr>
             </table>
@@ -26,3 +24,44 @@
     </legend>
 </fieldset>
 
+<table class="table">
+    <tr>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Precio</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Serie</th>
+        <th>Cantidad</th>
+        <th>Ubicacion</th>
+    </tr>
+    @if (ViewBag.ListaProductos == null)
+    {
+        <tr>
+            <th>   </th>
+            <th>   </th>
+            <th>   </th>
+            <th>   </th>
+        </tr>
+    }
+    else
+    {
+        foreach (PRODUCTOS p in ViewBag.ListaProductos)
+        {
+            <tr>
+                <th>@p.NOMBRE</th>
+                <th>@p.DESCRIPCION</th>
+                <th>@p.PRECIO</th>
+                <th>@p.MARCA</th>
+                <th>@p.MODELO</th>
+                <th>@p.SERIE</th>
+                <th>@p.CANTIDAD</th>
+                <th>@p.UBICACION</th>
+            </tr>
+        }
+    }
+
+
+
+
+</table>
