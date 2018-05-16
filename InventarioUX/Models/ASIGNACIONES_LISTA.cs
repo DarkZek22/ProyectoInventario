@@ -10,7 +10,7 @@ namespace InventarioUX.Models
     {
         public int ID { get; set; }
         public int PRECIO { get; set; }
-
+        public int CANTIDAD { get; set; }
 
         [ForeignKey("CONTAINING_PRODUCTOS")]
         public int PRODUCTOID { get; set; }

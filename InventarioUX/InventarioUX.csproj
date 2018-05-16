@@ -293,6 +293,9 @@
     <Content Include="Views\CarritoSalida\Details.cshtml" />
     <Content Include="Views\CarritoEntrada\ReciboEntrada.cshtml" />
     <Content Include="Views\Shared\_LayoutRecibos.cshtml" />
+    <Content Include="Views\CarritoSalida\ReciboSalida.cshtml" />
+    <Content Include="Views\CarritoAsignacion\ReciboAsignacion.cshtml" />
+    <Content Include="Views\CarritoAsignacion\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -55,8 +55,11 @@ namespace InventarioUX.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(pROVEEDORES);
+            else
+            {
+                ViewBag.ListaProveedores = db.PROVEEDORES.ToList();
+                return View(pROVEEDORES);
+            }           
         }
 
         // GET: PROVEEDORES/Edit/5

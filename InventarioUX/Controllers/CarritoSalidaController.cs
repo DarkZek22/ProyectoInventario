@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using InventarioUX.Models;
+using Rotativa;
 
 namespace InventarioUX.Controllers
 {
@@ -157,6 +158,7 @@ namespace InventarioUX.Controllers
             con.Open();
             Item i = new Item();
             List<Item> cart = (List<Item>)Session["cart"];
+            int preciototal = 0;
             mov_salida.EMPLEADOID = int.Parse(Session["ID"].ToString());
             mov_salida.DEPARTAMENTOID = int.Parse(Session["Departamento"].ToString());
             mov_salida.Fecha = DateTime.Now;
@@ -169,6 +171,7 @@ namespace InventarioUX.Controllers
                 mov_salida_lista.PRODUCTOID = item.Producto.ID;
                 mov_salida_lista.CANTIDAD = item.Cantidad;
                 mov_salida_lista.PRECIO = item.Producto.PRECIO;
+                preciototal = preciototal + (item.Producto.PRECIO * item.Cantidad);
                 mov_salida_lista.MOV_SALIDAID = mov_salida.ID;
                 db.MOV_SALIDA_LISTA.Add(mov_salida_lista);
                 db.SaveChanges();
@@ -176,8 +179,11 @@ namespace InventarioUX.Controllers
                 SqlCommand command = new SqlCommand("UPDATE PRODUCTOS SET CANTIDAD = CANTIDAD - " + item.Cantidad + " WHERE ID = " + item.Producto.ID + "", con);
                 command.ExecuteNonQuery();
             }
+            mov_salida.PRECIOTOTAL = preciototal;
+            db.SaveChanges();
             Session.Remove("cart");
             Session.Remove("Departamento");
+            preciototal = 0;
             return View("OrderSaved");
         }
 
@@ -220,6 +226,52 @@ namespace InventarioUX.Controllers
                 cart[i].Cantidad = Convert.ToInt32(cantidades[i]);
             }
             return View("Carrito");
+        }
+
+        public ActionResult ReciboSalida(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            MOV_SALIDA mOV_SALIDA = db.MOV_SALIDA.Find(id);
+            if (mOV_SALIDA == null)
+            {
+                return HttpNotFound();
+            }
+            List<int> result = new List<int>();
+            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            con.Open();
+            var command = new SqlCommand("SELECT ID FROM MOV_SALIDA_LISTA WHERE MOV_SALIDAID='" + id + "'", con);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                result.Add(Convert.ToInt32(reader["ID"]));
+            }
+            List<MOV_SALIDA_LISTA> listaProductos = new List<MOV_SALIDA_LISTA>();
+            int i = 0;
+            foreach (var w in result)
+            {
+                var x = db.MOV_SALIDA_LISTA.Find(result[i]);
+                MOV_SALIDA_LISTA x2 = new MOV_SALIDA_LISTA();
+                x2.CONTAINING_PRODUCTOS = x.CONTAINING_PRODUCTOS;
+                x2.PRECIO = x.PRECIO;
+                x2.CANTIDAD = x.CANTIDAD;
+                listaProductos.Add(x2);
+                i++;
+            }
+            ViewBag.ListaSalida = listaProductos;
+            return View(mOV_SALIDA);
+        }
+
+        public ActionResult ExportPDF(int? id)
+        {
+            return new ActionAsPdf("ReciboSalida", new { id = id })
+            {
+                FileName = Server.MapPath("~/Content/Relato.pdf"),
+                PageOrientation = Rotativa.Options.Orientation.Landscape,
+                PageSize = Rotativa.Options.Size.A4
+            };
         }
     }
 }

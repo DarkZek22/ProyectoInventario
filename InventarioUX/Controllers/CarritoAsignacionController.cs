@@ -5,6 +5,10 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data;
+using System.Data.Entity;
+using System.Net;
+using Rotativa;
 
 namespace InventarioUX.Controllers
 {
@@ -14,7 +18,45 @@ namespace InventarioUX.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var aSIGNACIONES = db.ASIGNACIONES.Include(a => a.CONTAINING_DEPARTAMENTOS).Include(a => a.CONTAINING_EMPLEADOS);
+            return View(aSIGNACIONES.ToList());
+
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ASIGNACIONES mOV_ASIGNACION = db.ASIGNACIONES.Find(id);
+            if (mOV_ASIGNACION == null)
+            {
+                return HttpNotFound();
+            }
+            List<int> result = new List<int>();
+            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            con.Open();
+            var command = new SqlCommand("SELECT ID FROM ASIGNACIONES_LISTA WHERE ASIGNACIONID='" + id + "'", con);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                result.Add(Convert.ToInt32(reader["ID"]));
+            }
+            List<ASIGNACIONES_LISTA> listaProductos = new List<ASIGNACIONES_LISTA>();
+            int i = 0;
+            foreach (var w in result)
+            {
+                var x = db.ASIGNACIONES_LISTA.Find(result[i]);
+                ASIGNACIONES_LISTA x2 = new ASIGNACIONES_LISTA();
+                x2.CONTAINING_PRODUCTOS = x.CONTAINING_PRODUCTOS;
+                x2.PRECIO = x.PRECIO;
+                x2.CANTIDAD = x.CANTIDAD;
+                listaProductos.Add(x2);
+                i++;
+            }
+            ViewBag.ListaAsignacion = listaProductos;
+            return View(mOV_ASIGNACION);
         }
 
         public ActionResult SelectProducto(FormCollection fc)
@@ -117,6 +159,7 @@ namespace InventarioUX.Controllers
             con.Open();
             Item i = new Item();
             List<Item> cart = (List<Item>)Session["cart"];
+            int preciototal = 0;
             asignaciones.EMPLEADOID = int.Parse(Session["ID"].ToString());
             int departamentoid = int.Parse(Session["Departamento"].ToString());
             asignaciones.DEPARTAMENTOID = departamentoid;
@@ -129,6 +172,7 @@ namespace InventarioUX.Controllers
                 ASIGNACIONES_LISTA asignaciones_lista = new ASIGNACIONES_LISTA();
                 asignaciones_lista.PRODUCTOID = item.Producto.ID;
                 asignaciones_lista.PRECIO = item.Producto.PRECIO;
+                preciototal = preciototal + (item.Producto.PRECIO * item.Cantidad);
                 asignaciones_lista.ASIGNACIONID = asignaciones.ID;
                 db.ASIGNACIONES_LISTA.Add(asignaciones_lista);
                 db.SaveChanges();
@@ -137,6 +181,8 @@ namespace InventarioUX.Controllers
                 SqlCommand command = new SqlCommand("UPDATE PRODUCTOS SET UBICACION = '" + departamentonombre + "' WHERE ID = " + item.Producto.ID + "", con);
                 command.ExecuteNonQuery();
             }
+            asignaciones.PRECIOTOTAL = preciototal;
+            db.SaveChanges();
             Session.Remove("cart");
             Session.Remove("Departamento");
             return View("OrderSaved");
@@ -181,6 +227,52 @@ namespace InventarioUX.Controllers
                 cart[i].Cantidad = Convert.ToInt32(cantidades[i]);
             }
             return View("Carrito");
+        }
+
+        public ActionResult ReciboAsignacion(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ASIGNACIONES mOV_ASIGNACION = db.ASIGNACIONES.Find(id);
+            if (mOV_ASIGNACION == null)
+            {
+                return HttpNotFound();
+            }
+            List<int> result = new List<int>();
+            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            con.Open();
+            var command = new SqlCommand("SELECT ID FROM ASIGNACIONES_LISTA WHERE ASIGNACIONID='" + id + "'", con);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                result.Add(Convert.ToInt32(reader["ID"]));
+            }
+            List<ASIGNACIONES_LISTA> listaProductos = new List<ASIGNACIONES_LISTA>();
+            int i = 0;
+            foreach (var w in result)
+            {
+                var x = db.ASIGNACIONES_LISTA.Find(result[i]);
+                ASIGNACIONES_LISTA x2 = new ASIGNACIONES_LISTA();
+                x2.CONTAINING_PRODUCTOS = x.CONTAINING_PRODUCTOS;
+                x2.PRECIO = x.PRECIO;
+                x2.CANTIDAD = x.CANTIDAD;
+                listaProductos.Add(x2);
+                i++;
+            }
+            ViewBag.ListaAsignacion = listaProductos;
+            return View(mOV_ASIGNACION);
+        }
+
+        public ActionResult ExportPDF(int? id)
+        {
+            return new ActionAsPdf("ReciboAsignacion", new { id = id })
+            {
+                FileName = Server.MapPath("~/Content/Relato.pdf"),
+                PageOrientation = Rotativa.Options.Orientation.Landscape,
+                PageSize = Rotativa.Options.Size.A4
+            };
         }
     }
 }

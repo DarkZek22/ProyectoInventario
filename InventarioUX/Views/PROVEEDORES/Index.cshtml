@@ -8,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    <a data-toggle='modal' data-target='#modalPROV' class='btn  btn-info'>Crear Proveedor</a>
+    <a data-toggle='modal' data-target='#modalPROV' class='btn  btn-info'>Nuevo Proveedor</a>
 </p>
 <table class="table">
     <tr>
@@ -75,12 +75,15 @@
                 </div>
                 <div class="modal-body">
                     @Html.Partial("Create")
-                    <button type="button" class="btn  btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn  btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
-
             </div>
         }
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,18 +1,13 @@
 ﻿@using InventarioUX.Models
 @model InventarioUX.Models.MOV_SALIDA
-
 @{
-    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutRecibos.cshtml";
 }
-
-<h2>Details</h2>
-
 <div>
-    <h4>MOV_ENTRADA</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.CONTAINING_EMPLEADOS.USERNAME)
+            Empleado:
         </dt>
 
         <dd>
@@ -20,7 +15,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CONTAINING_DEPARTAMENTOS.NOMBRE)
+            Departamento:
         </dt>
 
         <dd>
@@ -70,6 +65,3 @@
 
 </table>
 
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>

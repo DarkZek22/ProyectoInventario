@@ -17,8 +17,9 @@ namespace InventarioUX.Controllers
         // GET: EMPLEADOS
         public ActionResult Index()
         {
-            var eMPLEADOS = db.EMPLEADOS.Include(e => e.CONTAINING_TIPO_EMPLEADO);
-            return View(eMPLEADOS.ToList());
+            ViewBag.TIPO_EMPLEADOID = new SelectList(db.TIPO_EMPLEADO, "ID", "TIPO");
+            ViewBag.ListaEmpleados = db.EMPLEADOS.ToList();
+            return View();
         }
 
         // GET: EMPLEADOS/Details/5
@@ -48,7 +49,7 @@ namespace InventarioUX.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,USERNAME,PASSWORD,NOMBRE,AP_PATERNO,AP_MATERNO,TIPO_EMPLEADOID")] EMPLEADOS eMPLEADOS)
+        public ActionResult Index([Bind(Include = "ID,USERNAME,PASSWORD,NOMBRE,AP_PATERNO,AP_MATERNO,TIPO_EMPLEADOID")] EMPLEADOS eMPLEADOS)
         {
             if (ModelState.IsValid)
             {
@@ -56,9 +57,11 @@ namespace InventarioUX.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.TIPO_EMPLEADOID = new SelectList(db.TIPO_EMPLEADO, "ID", "TIPO", eMPLEADOS.TIPO_EMPLEADOID);
-            return View(eMPLEADOS);
+            else
+            {
+                ViewBag.ListaEmpleados = db.EMPLEADOS.ToList();
+                return View(eMPLEADOS);
+            }
         }
 
         // GET: EMPLEADOS/Edit/5

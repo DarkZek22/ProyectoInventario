@@ -32,8 +32,9 @@ namespace InventarioUX.Models
         public string DIRECCION { get; set; }
 
         [Required]
+        [StringLength(15, MinimumLength = 10, ErrorMessage = "Codigo de barras invalido")]
         [Display(Name = "Telefono")]
-        public int TELEFONO { get; set; }
+        public string TELEFONO { get; set; }
 
         [Required]
         [StringLength(20)]
