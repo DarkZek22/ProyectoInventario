@@ -25,17 +25,21 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+
+    </div>
+
+    <footer class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container">
             @if (Session["ID"] != null)
             {
-                <h6>&copy; @DateTime.Now.Year - Hola: @Session["USERNAME"].ToString() </h6>
+                <h6 class="navbar-brand">Universidad de Xalpa UX &copy; @DateTime.Now.Year - Hola: @Session["USERNAME"].ToString() </h6>
             }
             else
             {
-                <h4> </h4>
+                <h4 class="navbar-brand">Universidad de Xalpa UX &copy; @DateTime.Now.Year  </h4>
             }
-        </footer>
-    </div>
+        </div>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

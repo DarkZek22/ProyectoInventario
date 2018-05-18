@@ -1,18 +1,55 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
+<idv class="container">
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 well panel panel-default">
+            <div class="panel-heading">Todos los productos</div>
+            <h1><span>@Html.ActionLink("ALMACEN", "SelectAlmacen", "ALMACENs", new { area = "" }, new { @class = "btn btn-danger btn-block panel-body" })</span></h1>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 well panel panel-default">
+            <div class="panel-heading">Realizar registro de entrada</div>
+            <h1><span>@Html.ActionLink("ENTRADAS", "Index", "CarritoEntrada", new { area = "" }, new { @class = "btn btn-danger btn-block panel-body" })</span></h1>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 well panel panel-default">
+            <div class="panel-heading">Realizar registro de salida</div>
+            <h1><span>@Html.ActionLink("SALIDAS", "Index", "CarritoSalida", new { area = "" }, new { @class = "btn btn-danger btn-block panel-body" })</span></h1>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 well panel panel-default">
+            <div class="panel-heading">Asignación a departamentos</div>
+            <h1><span>@Html.ActionLink("ASIGNACIÓN", "Index", "CarritoAsignacion", new { area = "" }, new { @class = "btn btn-danger btn-block panel-body" })</span></h1>
+        </div>
+    </div>
 
-<div class="jumbotron">
-    <button>@Html.ActionLink("Almacen", "SelectAlmacen", "ALMACENs")</button>
-    <button>@Html.ActionLink("Entrada de productos", "Index", "CarritoEntrada")</button>
-    <button>@Html.ActionLink("Salida de productos", "Index", "CarritoSalida")</button>
-    <button>@Html.ActionLink("Asignacion de productos", "Index", "CarritoAsignacion")</button>
-    <button>@Html.ActionLink("Productos", "Index", "PRODUCTOS")</button>
-    <button>@Html.ActionLink("Proveedores", "Index", "PROVEEDORES")</button>
-    <button>@Html.ActionLink("Empleados", "Index", "EMPLEADOS")</button>
-    <button>@Html.ActionLink("Departamentos", "Index", "DEPARTAMENTOS")</button>
-    <button>@Html.ActionLink("Categorias de productos", "Index", "CAT_PRODUCTOS")</button>
-    <button>@Html.ActionLink("Tipos de empleado", "Index", "TIPO_EMPLEADOS")</button>
-</div>
+
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 well panel panel-default">
+            <div class="panel-heading" data-toggle="collapse">Registro de productos nuevos</div>
+            <h1><span>@Html.ActionLink("PRODUCTOS", "Index", "PRODUCTOS", new { area = "" }, new { @class = "btn btn-danger btn-block panel-body" })</span></h1>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 well panel panel-default">
+            <div class="panel-heading">Registro de proveedores</div>
+            <h1><span>@Html.ActionLink("PROVEERDORES", "Index", "PROVEEDORES", new { area = "" }, new { @class = "btn btn-danger btn-block panel-body" })</span></h1>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 well panel panel-default">
+            <div class="panel-heading">Panel Header</div>
+            <h1><span>@Html.ActionLink("EMPLEADOS", "Index", "EMPLEADOS", new { area = "" }, new { @class = "btn btn-danger btn-block panel-body" })</span></h1>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 well panel panel-default">
+            <div class="panel-heading">Registro de los departamentos</div>
+            <h1><span>@Html.ActionLink("DEPARTAMENTOS", "Index", "DEPARTAMENTOS", new { area = "" }, new { @class = "btn btn-danger btn-block panel-body" })</span></h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 well panel panel-default">
+            <div class="panel-heading">Gestion de categorias de productos</div>
+            <h1><span>@Html.ActionLink("CATEGORIAS", "Index", "CAT_PRODUCTOS", new { area = "" }, new { @class = "btn btn-danger btn-block panel-body" })</span></h1>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 well panel panel-default">
+            <div class="panel-heading">Panel Header</div>
+            <h1><span>@Html.ActionLink("Tipos de empleado", "Index", "TIPO_EMPLEADOS", new { area = "" }, new { @class = "btn btn-danger btn-block panel-body" })</span></h1>
+        </div>
+    </div>
+</idv>

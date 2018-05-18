@@ -34,7 +34,7 @@ namespace InventarioUX.Controllers
                 return HttpNotFound();
             }
             List<int> result = new List<int>();
-            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            var con = new SqlConnection("Data Source=DESKTOP-95OQ87C\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
             con.Open();
             var command = new SqlCommand("SELECT ID FROM MOV_SALIDA_LISTA WHERE MOV_SALIDAID='" + id + "'", con);
             SqlDataReader reader = command.ExecuteReader();
@@ -65,7 +65,7 @@ namespace InventarioUX.Controllers
 
         public ActionResult codigobarras(FormCollection fc)
         {
-            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            var con = new SqlConnection("Data Source=DESKTOP-95OQ87C\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
             con.Open();
 
             string[] cantidad = fc.GetValues("codigobarras");
@@ -154,7 +154,7 @@ namespace InventarioUX.Controllers
         public ActionResult Registrar()
         {
             MOV_SALIDA mov_salida = new MOV_SALIDA();
-            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            var con = new SqlConnection("Data Source=DESKTOP-95OQ87C\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
             con.Open();
             Item i = new Item();
             List<Item> cart = (List<Item>)Session["cart"];
@@ -195,7 +195,7 @@ namespace InventarioUX.Controllers
         public ActionResult Existencias()
         {
             List<Item> cart = (List<Item>)Session["cart"];
-            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            var con = new SqlConnection("Data Source=DESKTOP-95OQ87C\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
             con.Open();
             int cont = 0;
             foreach (Item item in cart)
@@ -240,7 +240,7 @@ namespace InventarioUX.Controllers
                 return HttpNotFound();
             }
             List<int> result = new List<int>();
-            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            var con = new SqlConnection("Data Source=DESKTOP-95OQ87C\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
             con.Open();
             var command = new SqlCommand("SELECT ID FROM MOV_SALIDA_LISTA WHERE MOV_SALIDAID='" + id + "'", con);
             SqlDataReader reader = command.ExecuteReader();

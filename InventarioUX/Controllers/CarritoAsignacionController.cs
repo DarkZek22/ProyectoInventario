@@ -35,7 +35,7 @@ namespace InventarioUX.Controllers
                 return HttpNotFound();
             }
             List<int> result = new List<int>();
-            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            var con = new SqlConnection("Data Source=DESKTOP-95OQ87C\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
             con.Open();
             var command = new SqlCommand("SELECT ID FROM ASIGNACIONES_LISTA WHERE ASIGNACIONID='" + id + "'", con);
             SqlDataReader reader = command.ExecuteReader();
@@ -66,7 +66,7 @@ namespace InventarioUX.Controllers
 
         public ActionResult codigobarras(FormCollection fc)
         {
-            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            var con = new SqlConnection("Data Source=DESKTOP-95OQ87C\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
             con.Open();
 
             string[] cantidad = fc.GetValues("codigobarras");
@@ -155,7 +155,7 @@ namespace InventarioUX.Controllers
         public ActionResult Registrar()
         {
             ASIGNACIONES asignaciones = new ASIGNACIONES();
-            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            var con = new SqlConnection("Data Source=DESKTOP-95OQ87C\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
             con.Open();
             Item i = new Item();
             List<Item> cart = (List<Item>)Session["cart"];
@@ -241,7 +241,7 @@ namespace InventarioUX.Controllers
                 return HttpNotFound();
             }
             List<int> result = new List<int>();
-            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            var con = new SqlConnection("Data Source=DESKTOP-95OQ87C\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
             con.Open();
             var command = new SqlCommand("SELECT ID FROM ASIGNACIONES_LISTA WHERE ASIGNACIONID='" + id + "'", con);
             SqlDataReader reader = command.ExecuteReader();
