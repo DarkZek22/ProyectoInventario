@@ -40,7 +40,7 @@ namespace InventarioUX.Controllers
                 return HttpNotFound();
             }
             List<int> result = new List<int>();
-            var con = new SqlConnection("Data Source=DESKTOP-95OQ87C\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
             con.Open();
             var command = new SqlCommand("SELECT ID FROM MOV_ENTRADA_LISTA WHERE MOV_ENTRADAID='" + id + "'", con);
             SqlDataReader reader = command.ExecuteReader();
@@ -77,7 +77,7 @@ namespace InventarioUX.Controllers
         /////////
         public ActionResult codigobarras(FormCollection fc)
         {
-            var con = new SqlConnection("Data Source=DESKTOP-95OQ87C\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
             con.Open();
 
             string[] cantidad = fc.GetValues("codigobarras");
@@ -195,7 +195,7 @@ namespace InventarioUX.Controllers
 
             foreach (Item item in cart)
             {
-                var con = new SqlConnection("Data Source=DESKTOP-95OQ87C\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+                var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
                 con.Open();
                 MOV_ENTRADA_LISTA mov_entrada_lista = new MOV_ENTRADA_LISTA();
                 mov_entrada_lista.PRODUCTOID = item.Producto.ID;
@@ -244,7 +244,7 @@ namespace InventarioUX.Controllers
                 return HttpNotFound();
             }
             List<int> result = new List<int>();
-            var con = new SqlConnection("Data Source=DESKTOP-95OQ87C\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
             con.Open();
             var command = new SqlCommand("SELECT ID FROM MOV_ENTRADA_LISTA WHERE MOV_ENTRADAID='" + id + "'", con);
             SqlDataReader reader = command.ExecuteReader();

@@ -29,7 +29,7 @@ namespace InventarioUX.Controllers
             //{
             using (ConnectionContext db = new ConnectionContext())
             {
-                var con = new SqlConnection("Data Source=DESKTOP-95OQ87C\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+                var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
                 con.Open();
                 var usr = db.EMPLEADOS.Where(u => u.USERNAME == empleado.USERNAME && u.PASSWORD == empleado.PASSWORD).FirstOrDefault();
                 if (usr != null)

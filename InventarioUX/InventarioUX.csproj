@@ -165,6 +165,7 @@
     <Compile Include="Controllers\ProductosEntradaController.cs" />
     <Compile Include="Controllers\ProductosSalidaController.cs" />
     <Compile Include="Controllers\PROVEEDORESController.cs" />
+    <Compile Include="Controllers\PruebaBindDDLController.cs" />
     <Compile Include="Controllers\TIPO_EMPLEADOSController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -177,6 +178,7 @@
     <Compile Include="Models\CAT_PRODUCTOS.cs" />
     <Compile Include="Models\ConnectionContext.cs" />
     <Compile Include="Models\DEPARTAMENTOS.cs" />
+    <Compile Include="Models\DeptoPuestoViewModel.cs" />
     <Compile Include="Models\EMPLEADOS.cs" />
     <Compile Include="Models\MOV_ENTRADA.cs" />
     <Compile Include="Models\MOV_ENTRADA_LISTA.cs" />
@@ -296,6 +298,7 @@
     <Content Include="Views\CarritoSalida\ReciboSalida.cshtml" />
     <Content Include="Views\CarritoAsignacion\ReciboAsignacion.cshtml" />
     <Content Include="Views\CarritoAsignacion\Details.cshtml" />
+    <Content Include="Views\PruebaBindDDL\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

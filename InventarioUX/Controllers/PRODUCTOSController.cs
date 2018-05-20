@@ -56,7 +56,7 @@ namespace InventarioUX.Controllers
         {
             if (ModelState.IsValid)
             {
-                var con = new SqlConnection("Data Source=DESKTOP-95OQ87C\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+                var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
                 con.Open();
                 db.PRODUCTOS.Add(pRODUCTOS);
                 db.SaveChanges();
