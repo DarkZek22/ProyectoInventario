@@ -11,72 +11,52 @@
     }
 </style>
 
-<h2>Details</h2>
+<div class="panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-heading">DETALLES DE LA ENTRADA</h3>
+        <ul class="dl-horizontal">
+            <li>Usuario: @Html.DisplayFor(model => model.CONTAINING_EMPLEADOS.USERNAME)</li>
+            <li>Nombre Proveedor:  @Html.DisplayFor(model => model.CONTAINING_PROVEEDORES.NOMBRE)</li>
+            <li>Fecha de entrada: @Html.DisplayFor(model => model.Fecha)</li>
 
-<div>
-    <h4>MOV_ENTRADA</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CONTAINING_EMPLEADOS.USERNAME)
-        </dt>
+        </ul>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.CONTAINING_EMPLEADOS.USERNAME)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CONTAINING_PROVEEDORES.NOMBRE)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CONTAINING_PROVEEDORES.NOMBRE)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fecha)
-        </dd>
-
-    </dl>
-</div>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Cantidad</th>
-            <th>Precio</th>
-            <th>Subtotal</th>
-        </tr>
-    </thead>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
 
 
-    @foreach (MOV_ENTRADA_LISTA m in ViewBag.ListaEntrada)
-    {
-        <tbody>
-            <tr>
-                <th>@m.CONTAINING_PRODUCTOS.NOMBRE</th>
-                <th>@m.CANTIDAD</th>
-                <th>@m.PRECIO</th>
-                <th>@(m.PRECIO * m.CANTIDAD)</th>
-            </tr>
-        </tbody>
+            @foreach (MOV_ENTRADA_LISTA m in ViewBag.ListaEntrada)
+        {
+            <tbody>
+                <tr>
+                    <th>@m.CONTAINING_PRODUCTOS.NOMBRE</th>
+                    <th>@m.CANTIDAD</th>
+                    <th>@m.PRECIO</th>
+                    <th>@(m.PRECIO * m.CANTIDAD)</th>
+                </tr>
+            </tbody>
     }
 
-    <tfoot>
-        <tr>
-            <th>Total</th>
-            <th colspan="2"></th>
-            <th id="total" colspan="2">@Html.DisplayFor(model => model.PRECIOTOTAL)</th>
-        </tr>
-    </tfoot>
+            <tfoot>
+                <tr>
+                    <th>Total</th>
+                    <th colspan="2"></th>
+                    <th id="total" colspan="2">@Html.DisplayFor(model => model.PRECIOTOTAL)</th>
+                </tr>
+            </tfoot>
 
-</table>
-
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
-
+        </table>
+    </div>
+    <p>
+        @Html.ActionLink("Regresar al registro", "Index", new { area = "" }, new { @class = "btn btn-danger" })
+    </p>
+</div>

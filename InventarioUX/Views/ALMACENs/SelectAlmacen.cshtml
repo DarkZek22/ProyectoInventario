@@ -6,23 +6,25 @@
 
 <h2>Almacen</h2>
 
-<fieldset>
-    <legend>
+
+    
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <table class="table">
-                <tr>
-                    <td>Seleccione un almacen: </td>
-                    <td>@Html.DropDownList("CATEGORIASID", null, htmlAttributes: new { @class = "form-control" })</td>
-                    @Html.ValidationMessageFor(model => model.CATEGORIASID, "", new { @class = "text-danger" })
-                    <td><input type="submit" value="Seleccionar" /></td>
-                </tr>
-            </table>
+            <nav class="navbar navbar-default">
+                <div class="navbar-brand">Seleccione un almacen: </div>
+                    <ul class="nav navbar-var navbar-form">
+                        <li>@Html.DropDownList("CATEGORIASID", null, htmlAttributes: new { @class = "form-control" })</li>
+                        @Html.ValidationMessageFor(model => model.CATEGORIASID, "", new { @class = "text-danger" })
+                        <li><input class="btn btn-danger" type="submit" value="Mostrar" /></li>
+                    </ul>
+                
+            </nav>
+            
         }
-    </legend>
-</fieldset>
+    
+
 
 <table class="table">
     <tr>
