@@ -1,21 +1,22 @@
-﻿@model InventarioUX.Models.ASIGNACIONES
+﻿@model InventarioUX.Models.DeptoPuestoViewModel
 @{
     ViewBag.Title = "CheckOut";
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 }
 
 <h2>Seleccione un departamento</h2>
 
 <fieldset>
-    <legend>
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("CheckOut", "CarritoAsignacion", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <table class="table">
                 <tr>
-                    <td>@Html.LabelFor(model => model.DEPARTAMENTOID, "DEPARTAMENTOID", htmlAttributes: new { @class = "control-label col-md-2" })</td>
-                    <td>@Html.DropDownList("DEPARTAMENTOID", null, htmlAttributes: new { @class = "form-control" })</td>
-                    @Html.ValidationMessageFor(model => model.DEPARTAMENTOID, "", new { @class = "text-danger" })
+                    <td>Departamento</td>
+                    <td>@Html.DropDownListFor(model => model.DeptoID, ViewBag.DEPARTAMENTOID as SelectList, "-----Seleccionar Depto-----", new { @class = "form-control" })</td>
+                    <td>Empleado</td>
+                    <td>@Html.DropDownListFor(model => model.TrabajadorID, new SelectList(" "), "-----Select Depto-----", new { @class = "form-control" })</td>
                 </tr>
                 <tr>
                     <td>     </td>
@@ -23,5 +24,18 @@
                 </tr>
             </table>
         }
-    </legend>
 </fieldset>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#DeptoID").change(function () {
+            $.get("/CarritoAsignacion/GetStateById", { DeptoID: $("#DeptoID").val() }, function (data) {
+                $("#TrabajadorID").empty();
+                $.each(data, function (index, row) {
+                    $("#TrabajadorID").append("<option value='" + row.ID + "'>" + row.NOMBRE + "</option > ")
+                });
+            });
+        })
+    });
+</script>

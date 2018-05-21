@@ -52,6 +52,7 @@ namespace InventarioUX.Controllers
                 x2.CATEGORIASID = x.CATEGORIASID;
                 x2.CANTIDAD = x.CANTIDAD;
                 x2.UBICACION = x.UBICACION;
+                x2.EMPLEADOASIGNACION = x.EMPLEADOASIGNACION;
                 listaProductos.Add(x2);
                 i++;
             }

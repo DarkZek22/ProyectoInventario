@@ -8,6 +8,6 @@ namespace InventarioUX.Models
     public class DeptoPuestoViewModel
     { 
         public int DeptoID { get; set; }
-        public int PuestoID { get; set; }
+        public int TrabajadorID { get; set; }
     }
 }

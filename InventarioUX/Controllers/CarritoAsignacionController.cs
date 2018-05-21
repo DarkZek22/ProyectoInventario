@@ -146,9 +146,18 @@ namespace InventarioUX.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Checkout([Bind(Include = "DEPARTAMENTOID")] ASIGNACIONES asignaciones)
+        public ActionResult Checkout(FormCollection fc)
         {
-            Session["Departamento"] = asignaciones.DEPARTAMENTOID;
+            string[] DeptoID = fc.GetValues("DeptoID");
+            string[] TrabajadorID = fc.GetValues("TrabajadorID");
+
+            string Depto = DeptoID[0].ToString();
+
+            int DID = Int32.Parse(DeptoID[0]);
+            int TID = Int32.Parse(TrabajadorID[0]);
+
+            Session["Departamento"] = DID;
+            Session["Trabajador"] = TID;
             return View("Carrito");
         }
 
@@ -162,6 +171,7 @@ namespace InventarioUX.Controllers
             int preciototal = 0;
             asignaciones.EMPLEADOID = int.Parse(Session["ID"].ToString());
             int departamentoid = int.Parse(Session["Departamento"].ToString());
+            int trabajadorid = int.Parse(Session["Trabajador"].ToString());
             asignaciones.DEPARTAMENTOID = departamentoid;
             asignaciones.Fecha = DateTime.Now;
             db.ASIGNACIONES.Add(asignaciones);
@@ -176,15 +186,22 @@ namespace InventarioUX.Controllers
                 asignaciones_lista.ASIGNACIONID = asignaciones.ID;
                 db.ASIGNACIONES_LISTA.Add(asignaciones_lista);
                 db.SaveChanges();
+                //Asigna nombre de depto al producto
                 SqlCommand command2 = new SqlCommand("SELECT NOMBRE FROM DEPARTAMENTOS WHERE ID = " + departamentoid + "", con);
                 string departamentonombre = (string)(command2.ExecuteScalar());
                 SqlCommand command = new SqlCommand("UPDATE PRODUCTOS SET UBICACION = '" + departamentonombre + "' WHERE ID = " + item.Producto.ID + "", con);
                 command.ExecuteNonQuery();
+                //Asigna nombre de empleado al producto
+                SqlCommand command3 = new SqlCommand("SELECT NOMBRE FROM TRABAJADORESUXes WHERE ID = " + trabajadorid + "", con);
+                string trabajadornombre = (string)(command3.ExecuteScalar());
+                SqlCommand command4 = new SqlCommand("UPDATE PRODUCTOS SET EMPLEADOASIGNACION = '" + trabajadornombre + "' WHERE ID = " + item.Producto.ID + "", con);
+                command4.ExecuteNonQuery();
             }
             asignaciones.PRECIOTOTAL = preciototal;
             db.SaveChanges();
             Session.Remove("cart");
             Session.Remove("Departamento");
+            Session.Remove("Trabajador");
             return View("OrderSaved");
         }
 
@@ -273,6 +290,13 @@ namespace InventarioUX.Controllers
                 PageOrientation = Rotativa.Options.Orientation.Landscape,
                 PageSize = Rotativa.Options.Size.A4
             };
+        }
+
+        public JsonResult GetStateById(int DeptoID)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<TRABAJADORESUX> PuestoList = db.TRABAJADORESUX.Where(x => x.DEPARTAMENTOID == DeptoID).ToList();
+            return Json(PuestoList, JsonRequestBehavior.AllowGet);
         }
     }
 }

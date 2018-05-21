@@ -56,6 +56,9 @@ namespace InventarioUX.Models
         [StringLength(120)]
         public string UBICACION { get; set; }
 
+        [StringLength(120)]
+        public string EMPLEADOASIGNACION { get; set; }
+
 
 
         [Display(Name = "Categoria de Producto")]

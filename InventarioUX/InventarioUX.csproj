@@ -167,6 +167,7 @@
     <Compile Include="Controllers\PROVEEDORESController.cs" />
     <Compile Include="Controllers\PruebaBindDDLController.cs" />
     <Compile Include="Controllers\TIPO_EMPLEADOSController.cs" />
+    <Compile Include="Controllers\TRABAJADORESController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -188,6 +189,7 @@
     <Compile Include="Models\PROVEEDORES.cs" />
     <Compile Include="Models\PUESTOS.cs" />
     <Compile Include="Models\TIPO_EMPLEADOS.cs" />
+    <Compile Include="Models\TRABAJADORESUX.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -299,6 +301,11 @@
     <Content Include="Views\CarritoAsignacion\ReciboAsignacion.cshtml" />
     <Content Include="Views\CarritoAsignacion\Details.cshtml" />
     <Content Include="Views\PruebaBindDDL\Index.cshtml" />
+    <Content Include="Views\TRABAJADORES\Create.cshtml" />
+    <Content Include="Views\TRABAJADORES\Delete.cshtml" />
+    <Content Include="Views\TRABAJADORES\Details.cshtml" />
+    <Content Include="Views\TRABAJADORES\Edit.cshtml" />
+    <Content Include="Views\TRABAJADORES\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

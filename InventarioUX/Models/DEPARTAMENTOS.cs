@@ -25,5 +25,6 @@ namespace InventarioUX.Models
         public virtual ICollection<ASIGNACIONES> ASIGNACIONES { get; set; }
         public virtual ICollection<MOV_SALIDA> MOV_SALIDA { get; set; }
         public virtual ICollection<PUESTOS> PUESTOS { get; set; }
+        public virtual ICollection<TRABAJADORESUX> TRABAJADORESUX { get; set; }
     }
 }

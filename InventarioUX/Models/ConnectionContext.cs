@@ -28,5 +28,6 @@ namespace InventarioUX.Models
         public DbSet<PROVEEDORES> PROVEEDORES { get; set; }
         public DbSet<PUESTOS> PUESTOS { get; set; }
         public DbSet<TIPO_EMPLEADOS> TIPO_EMPLEADO { get; set; }
+        public DbSet<TRABAJADORESUX> TRABAJADORESUX { get; set; }
     }
 }

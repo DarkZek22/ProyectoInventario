@@ -15,6 +15,7 @@
         <th>Serie</th>
         <th>Cantidad</th>
         <th>Ubicacion</th>
+        <th>Empleado</th>
     </tr>
 
     @foreach (PRODUCTOS p in ViewBag.ListaProductos)
@@ -28,6 +29,7 @@
                 <th>@p.SERIE</th>
                 <th>@p.CANTIDAD</th>
                 <th>@p.UBICACION</th>
+                <th>@p.EMPLEADOASIGNACION</th>
             </tr>
         }
 

@@ -9,16 +9,16 @@
 <h2>Index</h2>
 
 @Html.DropDownListFor(model => model.DeptoID, ViewBag.DEPARTAMENTOS as SelectList, "-----Select Depto-----", new { @class = "form-control" })
-@Html.DropDownListFor(model => model.PuestoID, new SelectList(" "), "-----Select Depto-----", new { @class = "form-control" })
+@Html.DropDownListFor(model => model.TrabajadorID, new SelectList(" "), "-----Select Depto-----", new { @class = "form-control" })
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script>
         $(document).ready(function () {
             $("#DeptoID").change(function () {
                 $.get("/PruebaBindDDL/GetStateById", { DeptoID: $("#DeptoID").val() }, function (data) {
-                    $("#PuestoID").empty();
+                    $("#TrabajadorID").empty();
                     $.each(data, function (index, row) {
-                        $("#PuestoID").append("<option value='" + row.ID + "'>" + row.NOMBRE + "</option > ")
+                        $("#TrabajadorID").append("<option value='" + row.ID + "'>" + row.NOMBRE + "</option > ")
                     });
                 });
             })
