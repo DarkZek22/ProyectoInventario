@@ -13,43 +13,66 @@
 <table class="table">
     @using (Html.BeginForm("Update", "CarritoEntrada", FormMethod.Post))
     {
-    <tr>
-        <th>Eliminar</th>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Cantidad<input type="submit" value="Update"/></th>
-        <th>Subtotal</th>
-    </tr>
-    if (Session["cart"] != null)
-    {
-        foreach (Item item in (List<Item>)Session["cart"])
+        <tr>
+            <th>Eliminar</th>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Cantidad<input type="submit" value="Update" /></th>
+            <th>Subtotal</th>
+        </tr>
+        if (Session["cart"] != null)
+        {
+            foreach (Item item in (List<Item>)Session["cart"])
+            {
+                <tr>
+                    <th><button class="btn btn-default">@Html.ActionLink("Eliminar", "Eliminar", "CarritoEntrada", new { id = item.Producto.ID })</button></th>
+                    <th>@item.Producto.ID</th>
+                    <th>@item.Producto.NOMBRE</th>
+                    <th>@item.Producto.PRECIO</th>
+                    <th><input type="text" name="Cantidad" , value="@item.Cantidad" /></th>
+                    <th>@(item.Producto.PRECIO * item.Cantidad)</th>
+                </tr>
+            }
+        }
+        else
         {
             <tr>
-                <th><button class="btn btn-default">@Html.ActionLink("Eliminar", "Eliminar", "CarritoEntrada", new { id = item.Producto.ID })</button></th>
-                <th>@item.Producto.ID</th>
-                <th>@item.Producto.NOMBRE</th>
-                <th>@item.Producto.PRECIO</th>
-                <th><input type="text" name="Cantidad", value="@item.Cantidad"/></th>
-                <th>@(item.Producto.PRECIO * item.Cantidad)</th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
             </tr>
         }
     }
-    else
-    {
-        <tr>
-            <th> </th>
-            <th> </th>
-            <th> </th>
-            <th> </th>
-            <th> </th>
-            <th> </th>
-        </tr>
-    }
-}
 </table>
 
-<button class="btn btn-default">@Html.ActionLink("Generar Entrada", "Registro", "CarritoEntrada")</button>
+<button class="btn btn-default">@Html.ActionLink("Generar Entrada", "Registro", "CarritoEntrada", new { data_toggle = "modal", data_target = "#modalS" })</button>
 <button class="btn btn-default">@Html.ActionLink("Cancelar Movimiento", "Index", "Account")</button>
 
 
+<div class="modal fade" id="modalS" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        @using (Html.BeginForm())
+        {
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Entradas</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Partial("OrderSaved")
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

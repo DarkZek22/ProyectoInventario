@@ -202,7 +202,7 @@ namespace InventarioUX.Controllers
             Session.Remove("cart");
             Session.Remove("Departamento");
             Session.Remove("Trabajador");
-            return View("OrderSaved");
+            return View();
         }
 
         public ActionResult Cancelar()

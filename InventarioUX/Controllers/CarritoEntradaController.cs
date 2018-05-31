@@ -214,7 +214,7 @@ namespace InventarioUX.Controllers
             Session.Remove("Proveedor");
             Session.Remove("cart");
             preciototal = 0;
-            return View("OrderSaved");
+            return View();
         }
 
         public ActionResult Cancelar()

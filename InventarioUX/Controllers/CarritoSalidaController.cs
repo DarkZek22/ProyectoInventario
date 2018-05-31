@@ -69,9 +69,9 @@ namespace InventarioUX.Controllers
             con.Open();
 
             string[] cantidad = fc.GetValues("codigobarras");
-            int codigobarras = Convert.ToInt32(cantidad[0]);
+            //int codigobarras = Convert.ToInt32(cantidad[0]);
 
-            var command = new SqlCommand("SELECT ID FROM dbo.PRODUCTOS WHERE CODIGOBARRAS='" + codigobarras + "'", con);
+            var command = new SqlCommand("SELECT ID FROM dbo.PRODUCTOS WHERE CODIGOBARRAS='" + cantidad[0] + "'", con);
             int id = (int)(command.ExecuteScalar());
 
             return RedirectToAction("Agregar", new { id = id });
@@ -184,7 +184,7 @@ namespace InventarioUX.Controllers
             Session.Remove("cart");
             Session.Remove("Departamento");
             preciototal = 0;
-            return View("OrderSaved");
+            return View();
         }
 
         public ActionResult Cancelar()
