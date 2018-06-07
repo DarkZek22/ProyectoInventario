@@ -84,9 +84,16 @@ namespace InventarioUX.Controllers
             //int codigobarras = Convert.ToInt32(cantidad[0]);
 
             var command = new SqlCommand("SELECT ID FROM dbo.PRODUCTOS WHERE CODIGOBARRAS='"+ cantidad[0] + "'", con);
-            int id = (int)(command.ExecuteScalar());
-
-            return RedirectToAction("Agregar", new { id = id});
+            try
+            {
+                int id = (int)(command.ExecuteScalar());
+                return RedirectToAction("Agregar", new { id = id });
+            }
+            catch
+            {
+                ViewBag.Error = true;
+                return View("Carrito");
+            }
         }
 
         /////////

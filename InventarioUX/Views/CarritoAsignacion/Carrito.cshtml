@@ -13,12 +13,13 @@
 <table class="table">
     @using (Html.BeginForm("Update", "CarritoAsignacion", FormMethod.Post))
     {
+        <input type="submit" class="btn btn-default" value="Actualizar cantidades" />
         <tr>
             <th>Eliminar</th>
             <th>ID</th>
             <th>Nombre</th>
             <th>Precio</th>
-            <th>Cantidad<input type="submit" value="Update" /></th>
+            <th>Cantidad</th>
             <th>Subtotal</th>
         </tr>
         if (Session["cart"] != null)
@@ -51,6 +52,35 @@
 
 <button class="btn btn-default">@Html.ActionLink("Generar Asignacion", "Registrar", "CarritoAsignacion", new { data_toggle = "modal", data_target = "#modalS" })</button>
 <button class="btn btn-default">@Html.ActionLink("Cancelar Movimiento", "Index", "Account")</button>
+
+<script src="~/Scripts/sweetalert2.js"></script>
+<script src="~/Scripts/sweetalert2.min.js"></script>
+<link href="~/Scripts/sweetalert2.css" rel="stylesheet" />
+@if (ViewBag.Error == true)
+{
+    <script>
+        window.onload = function () {
+            swal(
+                '¡El codigo de barras no existe!',
+                'Ingrese un codigo de barras valido',
+                'error'
+            )
+        };
+    </script>
+}
+
+@if (ViewBag.ErrorCantidad == true)
+{
+    <script>
+        window.onload = function () {
+            swal(
+                '¡Algun producto no cuenta con suficientes existencias!',
+                'Porfavor revise las existencias de los productos ingresados en el campo "Existencias"',
+                'error'
+            )
+        };
+    </script>
+}
 
 <div class="modal fade" id="modalS" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">

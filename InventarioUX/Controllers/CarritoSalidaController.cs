@@ -72,9 +72,16 @@ namespace InventarioUX.Controllers
             //int codigobarras = Convert.ToInt32(cantidad[0]);
 
             var command = new SqlCommand("SELECT ID FROM dbo.PRODUCTOS WHERE CODIGOBARRAS='" + cantidad[0] + "'", con);
-            int id = (int)(command.ExecuteScalar());
-
-            return RedirectToAction("Agregar", new { id = id });
+            try
+            {
+                int id = (int)(command.ExecuteScalar());
+                return RedirectToAction("Agregar", new { id = id });
+            }
+            catch
+            {
+                ViewBag.Error = true;
+                return View("Carrito");
+            }
         }
 
         public ActionResult Carrito()
@@ -219,11 +226,23 @@ namespace InventarioUX.Controllers
 
         public ActionResult Update(FormCollection fc)
         {
+            var con = new SqlConnection("Data Source=DESKTOP-I5C9AA0\\SQLEXPRESS2008;Initial Catalog=InventarioUXBD;Integrated Security=True");
+            con.Open();
             string[] cantidades = fc.GetValues("Cantidad");
             List<Item> cart = (List<Item>)Session["cart"];
             for (int i = 0; i < cart.Count; i++)
             {
-                cart[i].Cantidad = Convert.ToInt32(cantidades[i]);
+                var command = new SqlCommand("SELECT CANTIDAD FROM PRODUCTOS WHERE ID='" + cart[i].Producto.ID + "'", con);
+                int existencia = (int)(command.ExecuteScalar());
+                if (Convert.ToInt32(cantidades[i]) > existencia)
+                {
+                    ViewBag.ErrorCantidad = true;
+                    return View("Carrito");
+                }
+                else
+                {
+                    cart[i].Cantidad = Convert.ToInt32(cantidades[i]);
+                }
             }
             return View("Carrito");
         }
